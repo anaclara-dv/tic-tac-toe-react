@@ -1,6 +1,6 @@
 import { useState } from 'react';
-
-import Board from './components/Board';
+import styles from './App.module.scss';
+import  { Board } from './components/Board';
 
 import { calculateWinner } from './utils/calculateWinner';
 import { calculateDraw } from './utils/calculateDraw';
@@ -48,19 +48,18 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="game">
-        <div className="game-board">
-          <Board
-            squares={history}
-            onClick={(i) => handleClick(i)}
-          />
-        </div>
-        <button onClick={() => resetGame()}> resetar jogo </button>
-        <div className="game-info">
-          <div>{getStatus()}</div>
-          <div></div>
-        </div>
+    <div className={styles.game}>
+      <Board
+        squares={history}
+        onClick={(i) => handleClick(i)}
+      />
+
+      <button onClick={() => resetGame()}> resetar jogo </button>
+
+      <div className={styles.game_info}>
+        <div>{getStatus()}</div>
+
+        <div></div>
       </div>
     </div>
   );
