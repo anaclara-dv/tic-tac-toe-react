@@ -9,6 +9,8 @@ function App() {
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState(Array(9).fill(null));
+  const [score, setScore] = useState({x: 0, o: 0});
+  const [status, setStatus] = useState('');
 
   function handleClick(i: number) {
     const hasWinner = calculateWinner(history);
@@ -20,16 +22,24 @@ function App() {
     setHistory(history);
     setStepNumber(prevStep => prevStep + 1);
     setXIsNext((prevState) => !prevState);
+
+    getStatus() 
   }
 
   function getStatus() {
     const winner =  stepNumber > 5 && calculateWinner(history);
-    const draw = stepNumber === 9 && calculateDraw(history);
+    const draw = stepNumber > 8 && calculateDraw(history);
 
     let status;
 
     if (!!winner) {
       status = 'Winner: ' + winner;
+      if(winner === 'O') {
+        setScore(prevScore => ({x: prevScore.x, o: prevScore.o+1}))
+      }
+      else {
+        setScore(prevScore => ({x: prevScore.x+1, o: prevScore.o}))
+      }
     }
     else if (draw) {
       status = 'Tie';
@@ -38,7 +48,7 @@ function App() {
       status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     }
 
-    return status;
+    setStatus(status);
   }
 
   function resetGame() {
@@ -47,19 +57,29 @@ function App() {
     setStepNumber(0);
   }
 
+  function resetScore() {
+    setScore({x: 0, o: 0});
+  }
+
   return (
     <div className={styles.game}>
+      <h1>Tic Tac Toe</h1>
+
+      <div>{status}</div>
+
+      <div className={styles.score}>X: {score.x} O: {score.o}</div>
+
       <Board
         squares={history}
         onClick={(i) => handleClick(i)}
       />
 
-      <button onClick={() => resetGame()}> resetar jogo </button>
-
       <div className={styles.game_info}>
-        <div>{getStatus()}</div>
 
-        <div></div>
+        <button className={styles.buttonreset} onClick={() => resetGame()}> resetar jogo </button>
+
+        <button className={styles.buttonscore} onClick={() => resetScore()}> resetar placar </button>
+
       </div>
     </div>
   );
