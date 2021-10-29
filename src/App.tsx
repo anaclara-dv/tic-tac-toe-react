@@ -10,7 +10,7 @@ function App() {
   const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState(Array(9).fill(null));
   const [score, setScore] = useState({x: 0, o: 0});
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('Vez do jogador: ' + (xIsNext ? 'X' : 'O'));
 
   function handleClick(i: number) {
     const hasWinner = calculateWinner(history);
@@ -28,7 +28,7 @@ function App() {
 
   function getStatus() {
     const winner =  stepNumber > 5 && calculateWinner(history);
-    const draw = stepNumber > 8 && calculateDraw(history);
+    const draw = stepNumber === 9 && calculateDraw(history);
 
     let status;
 
@@ -45,7 +45,7 @@ function App() {
       status = 'Tie';
     }
     else {
-      status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+      status = 'Vez do jogador: ' + (xIsNext ? 'X' : 'O');
     }
 
     setStatus(status);
@@ -65,7 +65,7 @@ function App() {
     <div className={styles.game}>
       <h1>Tic Tac Toe</h1>
 
-      <div>{status}</div>
+      <span>{status}</span>
 
       <div className={styles.score}>X: {score.x} O: {score.o}</div>
 

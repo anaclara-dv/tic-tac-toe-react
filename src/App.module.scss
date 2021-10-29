@@ -6,18 +6,13 @@ body {
   margin-top: -20px;
   height: 100%;
   color:rgba(165, 109, 230, 0.6);
+  display: flex;
+  flex-direction: column;
+   justify-content: space-between;
 }
 
 html {
   height: 100%;
-}
-
-h1 {
-  font-size: 32px;
-  font-weight: 600;
-
-  margin-top: 0;
-  padding: 16px;
 }
 
 .game {
@@ -29,37 +24,60 @@ h1 {
   justify-content: center;
 }
 
-.buttonscore {
-  background-color: rgba(165, 109, 230, 0.6);
-  color: rgba(114, 228, 110, 0.897);
-  font-family: 'Questrial', sans-serif;
-  width: 170px;
-  height: 30px;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  font-weight: bold;
-  display:inline-block;
-}
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  padding: 16px;
 
-.buttonreset {
-  background-color: rgba(165, 109, 230, 0.6);
-  color: rgba(114, 228, 110, 0.897);
-  font-family: 'Questrial', sans-serif;
-  width: 170px;
-  height: 30px;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  font-weight: bold;
-  display:inline-block;
 }
 
 .score {
   background-color: #fff;
-  color: rgba(114, 228, 110, 0.897);
+  color: rgba(114, 228, 110, 1.0);
   font-weight: bold;
-  margin-bottom: 30px;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  padding: 20px 16px;
+  gap: 20px;
+}
+
+span {
+  font-size: 17px;
+}
+
+.game_info {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.buttonscore {
+  background-color: rgba(165, 109, 230, 0.4);
+  color: rgb(79, 182, 75);
+  font-family: 'Questrial', sans-serif;
   font-size: 15px;
+  width: 150px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  font-weight: bold;
+  
+}
+
+.buttonreset {
+  background-color: rgba(165, 109, 230, 0.4);
+  color: rgb(79, 182, 75);
+  font-family: 'Questrial', sans-serif;
+  font-size: 15px;
+  width: 150px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  font-weight: bold;
+
 }
 
