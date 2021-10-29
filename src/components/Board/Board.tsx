@@ -1,5 +1,6 @@
 import { Square } from '../Square';
 import styles from './Board.module.scss'; 
+import { useMemo } from 'react';
 
 interface Props {
   squares: any[];
@@ -7,7 +8,27 @@ interface Props {
 }
 
 function Board(props: Props) {
+  const squares: any = useMemo(() => {  
+    return (
+      <div className={ styles.board }>
+        {props.squares
+          .map((square: any, index: number) => {
+          return <Square value={square} onClick={() => props.onClick(index)}/>
+          })
+        }
+      </div>)
+  }, [props]);
+
   return (
+    <>
+      {squares}
+    </>
+  )
+}
+
+
+
+ /* return (
     <div className={ styles.board }>
       
         <Square value={props.squares[0]} onClick={() => props.onClick(0)}/>
@@ -25,7 +46,6 @@ function Board(props: Props) {
         <Square value={props.squares[8]} onClick={() => props.onClick(8)}/>
       
     </div>
-  );
-};
+  );*/
 
 export default Board;

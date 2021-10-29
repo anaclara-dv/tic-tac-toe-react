@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import styles from './App.module.scss';
 import  { Board } from './components/Board';
 
@@ -12,23 +12,9 @@ function App() {
   const [score, setScore] = useState({x: 0, o: 0});
   const [status, setStatus] = useState('Vez do jogador: ' + (xIsNext ? 'X' : 'O'));
 
-  function handleClick(i: number) {
-    const hasWinner = calculateWinner(history);
-
-    if (hasWinner || history[i]) return;
-
-    history[i] = xIsNext ? 'X' : 'O';
-
-    setHistory(history);
-    setStepNumber(prevStep => prevStep + 1);
-    setXIsNext((prevState) => !prevState);
-
-    getStatus() 
-  }
-
-  function getStatus() {
-    const winner =  stepNumber > 5 && calculateWinner(history);
-    const draw = stepNumber === 9 && calculateDraw(history);
+  const getStatus = useCallback(() => {
+    const winner =  stepNumber >= 4 && calculateWinner(history);
+    const draw = stepNumber === 8 && calculateDraw(history);
 
     let status;
 
@@ -45,11 +31,25 @@ function App() {
       status = 'Tie';
     }
     else {
-      status = 'Vez do jogador: ' + (xIsNext ? 'X' : 'O');
+      status = 'Vez do jogador: ' + (xIsNext ? 'O' : 'X');
     }
 
     setStatus(status);
-  }
+  }, [history, xIsNext, stepNumber]);
+
+  const handleClick = useCallback((i: number) => {
+    const hasWinner = calculateWinner(history);
+
+    if (hasWinner || history[i]) return;
+
+    history[i] = xIsNext ? 'X' : 'O';
+
+    setHistory(history);
+    setStepNumber(prevStep => prevStep + 1);
+    setXIsNext((prevState) => !prevState);
+
+    getStatus() 
+  }, [history, xIsNext, getStatus]);
 
   function resetGame() {
     setHistory(Array(9).fill(null));
