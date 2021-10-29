@@ -65,9 +65,13 @@ function App() {
     <div className={styles.game}>
       <h1>Tic Tac Toe</h1>
 
-      <span>{status}</span>
+      <span className={styles.status}>{status}</span>
 
-      <div className={styles.score}>X: {score.x} O: {score.o}</div>
+      <div className={styles.score}>
+        <span className={styles.x}>X: {score.x}</span> 
+
+        <span className={styles.o}>O: {score.o}</span>
+      </div>
 
       <Board
         squares={history}

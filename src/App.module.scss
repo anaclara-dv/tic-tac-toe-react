@@ -36,14 +36,22 @@ h1 {
   background-color: #fff;
   color: rgba(114, 228, 110, 1.0);
   font-weight: bold;
-  font-size: 17px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   padding: 20px 16px;
   gap: 20px;
 }
 
-span {
+.x {
+  color: #E6E455;
+}
+
+.o {
+  color: #E6E455;
+}
+
+.status {
   font-size: 17px;
 }
 
